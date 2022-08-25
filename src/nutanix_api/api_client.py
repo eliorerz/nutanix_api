@@ -73,6 +73,7 @@ class NutanixApiClient:
     def _request(
         cls, url: str, method: Callable, body: Dict[str, Any] = None, offset: int = 0, timeout=DEFAULT_REQUEST_TIMEOUT
     ):
+        url = url.replace("//", "/")
         if body is not None and offset != 0:
             body["offset"] = offset
         server_response = method(url, timeout=timeout) if body is None else method(url, json=body)
